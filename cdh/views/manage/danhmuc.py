@@ -1,0 +1,115 @@
+from django.http import HttpResponse
+from django.template import loader
+from django.shortcuts import redirect
+from cdh.models import ChuyenNganh, Customer, User
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+
+
+def danhsach(request):
+    ds_danhmuc = ChuyenNganh.objects.all().order_by('ma_chuyen_nganh')[::-1]
+    temp = loader.get_template('danhmuc_ds.html')
+    query = request.GET.get("q")
+    if query:
+        ds_danhmuc = ChuyenNganh.objects.filter(ten_chuyen_nganh__icontains = query)
+    paginator = Paginator(ds_danhmuc, 5)
+    pageNumber = request.GET.get('page')
+    try:
+        ds_danhmuc = paginator.page(pageNumber)
+    except PageNotAnInteger:
+        ds_danhmuc = paginator.page(1)
+    except EmptyPage:
+        ds_danhmuc = paginator.page(paginator.num_pages)
+    user = ""
+    if request.session.has_key('username'):
+        username = request.session['username']
+        user = User.objects.get(username=username)
+    if request.GET.get("btnlogin"):
+        username = request.GET.get('username')
+        matkhau = request.GET.get('password')
+        try:
+            user = User.objects.get(username=username, mat_khau=matkhau)
+            request.session['username'] = user.username
+        except:
+            user = ""
+
+    if request.GET.get("btnlogout"):
+        del request.session['username']
+        user = ""
+    context = {
+        "ds_danhmuc": ds_danhmuc,
+        "q": query,
+        "user":user
+    }
+    return HttpResponse(temp.render(context))
+
+def them(request):
+    if request.method == "POST":
+        dm = ChuyenNganh()
+        dm.ten_chuyen_nganh = request.POST['txttendm']
+        dm.save()
+        return redirect('danhmuc_ds')
+    user = ""
+    if request.session.has_key('username'):
+        username = request.session['username']
+        user = User.objects.get(username=username)
+    if request.GET.get("btnlogin"):
+        username = request.GET.get('username')
+        matkhau = request.GET.get('password')
+        try:
+            user = User.objects.get(username=username, mat_khau=matkhau)
+            request.session['username'] = user.username
+        except:
+            user = ""
+
+    if request.GET.get("btnlogout"):
+        del request.session['username']
+        user = ""
+    context = {"title": "danh muc | them", "user":user}
+    template = loader.get_template('danhmuc_them.html')
+    return HttpResponse(template.render(context, request))
+
+def sua(request, danh_muc_id):
+    danhmuc = ChuyenNganh.objects.get(pk=danh_muc_id)
+    if request.method == "POST":
+        danhmuc.ten_chuyen_nganh = request.POST['txttendm']
+        danhmuc.save()
+        return redirect('danhmuc_ds')
+    user = ""
+    if request.session.has_key('username'):
+        username = request.session['username']
+        user = User.objects.get(username=username)
+    if request.GET.get("btnlogin"):
+        username = request.GET.get('username')
+        matkhau = request.GET.get('password')
+        try:
+            user = User.objects.get(username=username, mat_khau=matkhau)
+            request.session['username'] = user.username
+        except:
+            user = ""
+
+    if request.GET.get("btnlogout"):
+        del request.session['username']
+        user = ""
+    context = {"danh_muc": danhmuc, "user":user}
+    template = loader.get_template('danhmuc_sua.html')
+    return HttpResponse(template.render(context, request))
+
+def xoa(request, danh_muc_id):
+    ChuyenNganh.objects.get(pk=danh_muc_id).delete()
+    return redirect('danhmuc_ds')
+
+
+def listing(request):
+    customer_list = Customer.objects.all()
+    paginator = Paginator(customer_list, 5)
+
+    pageNumber = request.GET.get('page')
+    try:
+        customers = paginator.page(pageNumber)
+    except PageNotAnInteger:
+        customers = paginator.page(1)
+    except EmptyPage:
+        customers = paginator.page(paginator.num_pages)
+
+    return render(request, 'list.html', {'customers': customers})

@@ -1,0 +1,409 @@
+<head>
+
+	<!-- custom-theme -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Treasurer Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- //custom-theme -->
+    {% load static %}
+	<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<link href="{% static 'css/slicebox.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome-icons -->
+	<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+	<!-- //font-awesome-icons -->
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	    rel='stylesheet' type='text/css'>
+	<link href="//fonts.googleapis.com/css?family=Raleway:100i,200,200i,300,400,500,500i,600,700,700i,800,800i" rel="stylesheet">
+
+</head>
+<body>
+	<div class="agileits_w3layouts_banner_nav">
+		<nav class="navbar navbar-default">
+			<div class="navbar-header navbar-left">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				<h1><a class="navbar-brand" href="../../trangchu/"><i class="fa fa-home" aria-hidden="true"></i> IT school</a></h1>
+
+			</div>
+			{% if user != "" %}
+			<div class="collapse navbar-collapse navbar-right">
+				<nav>
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle hvr-underline-from-center" data-toggle="dropdown">
+								<img height="25" style="float:left; margin:auto" class="img-circle" src="/media/{{user.img}}" alt="">
+								<b class="fa fa-caret-down"></b>
+							</a>
+							<ul class="dropdown-menu agile_short_dropdown">
+								<li><a href="{% url 'index' %}">Truy cập quản lý</a></li>
+								<li><a href="#">Cài đặt cá nhân</a></li>
+								<li>
+									<a href="#">
+										<form action="" method="GET">{% csrf_token %}
+											<div class="tp">
+												<input type="submit" class="btn" style="background-color:white" name="btnlogout" value="Đăng xuất">
+											</div>
+										</form>
+									</a>
+
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			{% else %}
+			<ul class="agile_forms">
+				<li><a class="active" href="#" data-toggle="modal" data-target="#modalDangnhap"> đăng nhập</a> </li>
+				<li><a href="#" data-toggle="modal" data-target="#modalDangki"> đăng kí</a> </li>
+			</ul>
+			{% endif %}
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+				<nav>
+					<ul class="nav navbar-nav">
+						<li><a href="../../trangchu/" class="hvr-underline-from-center">Home</a></li>
+
+						<li class="dropdown active">
+							<a href="#" class="dropdown-toggle hvr-underline-from-center" data-toggle="dropdown">Danh mục <b class="fa fa-caret-down"></b></a>
+							{% if ds_chuyen_nganh %}
+							<ul class="dropdown-menu agile_short_dropdown">
+								{% for chuyen_nganh in ds_chuyen_nganh %}
+								<li><a href="../../danhmuc/{{ chuyen_nganh.ma_chuyen_nganh }}">{{chuyen_nganh.ten_chuyen_nganh}}</a></li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+						</li>
+						<li><a href="../../lienhe/" class="hvr-underline-from-center">Liên hệ</a></li>
+					</ul>
+				</nav>
+
+			</div>
+			<div class="collapse navbar-collapse navbar-right">
+				<form action="" method="GET">
+					<ul class="form-control panel">
+						<input type="Search" name="q" class="form-inline" placeholder="{{ q }}">
+						<button type="Submit" name="btntim" id="btntim" style="background-color:white" class="btn"><i class="fa fa-search"></i></button>
+					</ul>
+				</form>
+			</div>
+		</nav>
+
+		<div class="clearfix"> </div>
+	</div>
+	<!-- Modal1 -->
+	<div class="modal fade" id="modalDangnhap" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					<div class="signin-form profile">
+						<h3 class="agileinfo_sign">Đăng nhập</h3>
+						<div class="login-form">
+							<form action="" method="GET">{% csrf_token %}
+								<input type="text" name="username" placeholder="username" required="">
+								<input type="password" name="password" placeholder="Password" required="">
+								<div class="tp">
+									<input type="submit" name="btnlogin" value="Đăng nhập">
+								</div>
+							</form>
+						</div>
+						<div class="login-social-grids">
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							</ul>
+						</div>
+						<p><a href="#" data-toggle="modal" data-target="#myModal3"> Tôi chưa có tài khoản?</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //Modal1 -->
+	<!-- Modal2 -->
+	<div class="modal fade" id="modalDangki" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+
+					<div class="signin-form profile">
+						<h3 class="agileinfo_sign">Đăng kí</h3>
+						<div class="login-form">
+							<form action="#" method="post">
+								<input type="Text" name="txtusername" placeholder="Username" required="">
+								<input type="password" name="txtpassword1" id="password1" placeholder="Password" required="">
+								<input type="password" name="txtpassword2" id="password2" placeholder="Confirm Password" required="">
+								<input type="Text" name="txthoten" placeholder="Họ và tên" required="">
+								<input type="submit" name="btndangki" value="Đăng kí">
+							</form>
+						</div>
+						<p><a href="#"> Click vào đăng kí, đồng ý với các điều khoản</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    {% block nd %}{%endblock%}
+
+	<style>
+		.hop {
+
+	<!--height: 95%;-->
+    background:#FFF;
+    margin:20px auto;
+}
+.hop: hover{
+	box-shadow: 5px 5px 5px #666;
+	-moz-box-shadow: 5px 5px 5px #666;
+	-webkit-box-shadow: 5px 5px 5px #666;
+}
+	</style>
+    <div class="footer">
+		<div class="container">
+			<div class="w3_agile_footer_grids">
+				<div class="col-md-4 w3_agile_footer_grid">
+					<h3>Liên hệ</h3>
+					<ul class="agile_footer_grid_list">
+						<li><i class="fa fa-phone" aria-hidden="true"></i><span>hotline: 0968 747 838</span></li>
+						<li><i class="fa fa-facebook" aria-hidden="true"></i>facebook: <a href="#">facebook.com/ITschool</a>							cumque nihil impedit. <span>2 days ago</span></li>
+					</ul>
+				</div>
+				<div class="col-md-4 w3_agile_footer_grid">
+					<h3>Danh mục</h3>
+					<ul class="agileits_w3layouts_footer_grid_list">
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="index.html">Home</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="about.html">Giới thiệu</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="portfolio.html">Chuyên nghành</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="contact.html">Liên hệ</a></li>
+					</ul>
+				</div>
+				<div class="col-md-4 w3_agile_footer_grid">
+					<h3>Ban quản trị</h3>
+					<div class="w3_agileits_footer_grid_left">
+						<a href="#" data-toggle="modal" data-target="#myModal">
+							<img src="images/f1.jpg" alt=" " class="img-responsive" />
+						</a>
+					</div>
+
+
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+
+			<div class="agileinfo_copyright">
+				<p>Hỗ trợ IT-school: <a href="https://facebook.com/lantucntt">facebook.com/langtucntt</a></p>
+			</div>
+		</div>
+	</div>
+
+<!-- menu -->
+	<!-- js -->
+	<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/modernizr.custom.46884.js' %}"></script>
+	<!-- password-script -->
+	<script type="text/javascript">
+		window.onload = function () {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+
+		function validatePassword() {
+			var pass2 = document.getElementById("password2").value;
+			var pass1 = document.getElementById("password1").value;
+			if (pass1 != pass2)
+				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');
+			//empty string means no validation error
+		}
+	</script>
+	<!-- //password-script -->
+    <script src="{% static 'js/bars.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/jquery.slicebox.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+
+			var Page = (function () {
+
+				var $navArrows = $('#nav-arrows').hide(),
+					$navDots = $('#nav-dots').hide(),
+					$nav = $navDots.children('span'),
+					$shadow = $('#shadow').hide(),
+					slicebox = $('#sb-slider').slicebox({
+						onReady: function () {
+
+							$navArrows.show();
+							$navDots.show();
+							$shadow.show();
+
+						},
+						onBeforeChange: function (pos) {
+
+							$nav.removeClass('nav-dot-current');
+							$nav.eq(pos).addClass('nav-dot-current');
+
+						}
+					}),
+
+					init = function () {
+
+						initEvents();
+
+					},
+					initEvents = function () {
+
+						// add navigation events
+						$navArrows.children(':first').on('click', function () {
+
+							slicebox.next();
+							return false;
+
+						});
+
+						$navArrows.children(':last').on('click', function () {
+
+							slicebox.previous();
+							return false;
+
+						});
+
+						$nav.each(function (i) {
+
+							$(this).on('click', function (event) {
+
+								var $dot = $(this);
+
+								if (!slicebox.isActive()) {
+
+									$nav.removeClass('nav-dot-current');
+									$dot.addClass('nav-dot-current');
+
+								}
+
+								slicebox.jump(i + 1);
+								return false;
+
+							});
+
+						});
+
+					};
+
+				return {
+					init: init
+				};
+
+			})();
+
+			Page.init();
+
+		});
+	</script>
+	<!-- Stats -->
+	<script src="{% static 'js/waypoints.min.js' %}"></script>
+	<script src="{% static 'js/counterup.min.js' %}"></script>
+	<script>
+		jQuery(document).ready(function ($) {
+			$('.counter').counterUp({
+				delay: 4,
+				time: 2000
+			});
+		});
+	</script>
+	<!-- //Stats -->
+
+	<script type="text/javascript" src="{% static 'js/jquery.flexisel.js' %}"></script>
+	<!-- flexisel -->
+	<script type="text/javascript">
+		<!--$(window).load(function () {
+			$("#flexiselDemo1").flexisel({
+				visibleItems: 4,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,
+				pauseOnHover: true,
+				enableResponsiveBreakpoints: true,
+				responsiveBreakpoints: {
+					portrait: {
+						changePoint: 480,
+						visibleItems: 1
+					},
+					landscape: {
+						changePoint: 640,
+						visibleItems: 2
+					},
+					tablet: {
+						changePoint: 768,
+						visibleItems: 2
+					}
+				}
+			});
+
+		});
+	</script>-->
+	<!-- //flexisel -->
+	<!-- //flexisel -->
+	<!-- js for portfolio lightbox -->
+	<script src="{% static 'js/jquery.chocolat.js' %}"></script>
+	<!-- //menu -->
+	<!-- for bootstrap working -->
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+	<!-- //for bootstrap working -->
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/easing.js' %}"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- start-smoth-scrolling -->
+	<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<!-- //js -->
+
+</body>

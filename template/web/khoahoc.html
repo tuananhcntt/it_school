@@ -1,0 +1,110 @@
+{% extends "web/base1.html" %}
+{% block nd %}
+
+<div class="agile_inner_banner_info">
+	<h2>{{ khoa_hoc.ten_khoa_hoc }} </h2>
+	<p></p>
+</div>
+<div class="services">
+	<div class="container">
+		<div class="col-md-6 w3layouts_about_grid_left">
+			<div class="w3_about_grid">
+				<center><img src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" /></center>
+			</div>
+			<div class="col-md-6 w3layouts_about_grid_left1">
+				<img src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" />
+			</div>
+			<div class="col-md-6 w3layouts_about_grid_left1">
+				<img src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" />
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="col-md-6 w3layouts_about_grid_right">
+			<h3>Giới thiệu khóa học</h3>
+			<p class="w3_turpis_para">{{khoa_hoc.gioi_thieu}}</p>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"> </div>
+<div class="services">
+	<div class="container">
+		<h3 class="tittle_agile_w3">Các bài viết</h3>
+		<div class="heading-underline">
+			<div class="h-u1"></div>
+			<div class="h-u2"></div>
+			<div class="h-u3"></div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="w3l-news_info_agile_its">
+				{% if ds_bai %}
+					{% for bai in ds_bai %}
+						<div class="w3l-news col-md-6">
+							<div class="media response-info hop">
+								<div class="media-left response-text-left">
+									<a href="#" data-toggle="modal" data-target="#{{bai.ma_bai}}">
+										<img height="200" class="media-object" src="/media/{{ khoa_hoc.img }}" alt="">
+									</a>
+									<!-- Modal1 -->
+									<div class="modal fade" id="{{bai.ma_bai}}" tabindex="-1" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4>{{bai.ten_bai}}</h4>
+
+													<span>{{bai.noi_dung}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- //Modal1 -->
+								</div>
+								<div class="media-body response-text-right">
+									<h5>{{bai.ten_bai}}</h5>
+									<ul>
+										<li><i class="fa fa-calendar" aria-hidden="true"></i> 20/11/2017</li>
+										</br>
+										<li><i class="fa fa-users" aria-hidden="true"></i> đăng kí : 7685</li>
+									</ul>
+									<p><a href="#"><i class="fa fa-eyes">Giới thiệu về khóa học</i></a></p>
+									<div class="read">
+										<a href="../../baiviet/{{bai.ma_bai}}" class="view resw3">Chi tiết bài viết</a>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					{% endfor %}
+				{% endif %}
+				<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>
+<div class="services">
+	<center>
+	<ul class="pagination pagintion-sm">
+		<div class="pagination">
+			<span class="step-links">
+				{% if ds_bai.has_previous %}
+					<a href="?page={{ ds_bai.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+				{% endif %}
+			</span>
+
+			<span class="current">
+				Trang {{ ds_bai.number }} / {{ ds_bai.paginator.num_pages }}
+			</span>
+
+			<span>
+				{% if ds_bai_viet.has_next %}
+					<a href="?page={{ ds_bai.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				{% endif %}
+			</span>
+		</div>
+	</ul>
+	</center>
+</div>
+{% endblock %}
+

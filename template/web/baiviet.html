@@ -1,0 +1,133 @@
+{% extends "web/base1.html" %}
+{% block nd %}
+
+<div class="agile_inner_banner_info">
+	<h2>{{ ct_bai_viet.ten_bai }} </h2>
+	<p></p>
+</div>
+<div class="services">
+	<div class="container">
+		<div class="col-md-6 w3layouts_about_grid_left">
+			<div class="w3_about_grid">
+				<center><img class="img-circle" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" /></center>
+			</div>
+			<div class="col-md-6 w3layouts_about_grid_left1">
+				<img class="img-circle" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" />
+			</div>
+			<div class="col-md-6 w3layouts_about_grid_left1">
+				<img class="img-circle" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" />
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="col-md-6 w3layouts_about_grid_right">
+			<p class="w3_turpis_para box modal-content">
+                {% if ds_bai_viet %}
+                    <fieldset>
+						<legend>
+							<h3 style="float:left">Seri khóa học</h3>
+						<ul style="float:right" class="pagination pagintion-sm">
+							<div class="pagination">
+								<span class="step-links">
+									{% if ds_bai_viet.has_previous %}
+										<a href="?page={{ ds_bai_viet.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+									{% endif %}
+								</span>
+
+								<span class="current">
+									{{ ds_bai_viet.number }} / {{ ds_bai_viet.paginator.num_pages }}
+								</span>
+
+								<span>
+									{% if ds_bai_viet.has_next %}
+										<a href="?page={{ ds_bai_viet.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+									{% endif %}
+								</span>
+							</div>
+						</ul>
+                        </legend>
+                        {% for bv in ds_bai_viet %}
+							{% if bv.ma_bai is ct_bai_viet.ma_bai %}
+							<p class="hop"><a href="../../baiviet/{{bv.ma_bai}}" style="color: red">{{ bv.ten_bai }}</a></p>
+							{% else %}
+							<p class="hop"><a href="../../baiviet/{{bv.ma_bai}}">{{ bv.ten_bai }}</a></p>
+							{% endif %}
+                        {% endfor %}
+                    </fieldset>
+                {% endif %}
+            </p>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+<div class="clearfix"> </div>
+<div class="services">
+	<div class="container">
+		<div class="w3l-news_info_agile_its">
+				{% if ct_bai_viet%}
+                    <div class="dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4>{{ct_bai_viet.ten_bai}}</h4>
+                                <span>{{ct_bai_viet.noi_dung}}</span>
+                            </div>
+                        </div>
+                    </div>
+				{% endif %}
+				<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>
+<div class="services">
+	<div class="container">
+		<h3 class="tittle_agile_w3">Có thể bạn sẽ cần</h3>
+		<div class="w3l-news_info_agile_its">
+				{% if ds_khoa_hoc %}
+					{% for khoahoc in ds_khoa_hoc %}
+						<div class="w3l-news col-md-6">
+							<div class="media response-info hop">
+								<div class="media-left response-text-left">
+									<a href="#" data-toggle="modal" data-target="#{{khoahoc.ma_khoa_hoc}}">
+										<img height="200" class="media-object" src="/media/{{ khoahoc.img }}" alt="">
+									</a>
+									<!-- Modal1 -->
+									<div class="modal fade" id="{{khoahoc.ma_khoa_hoc}}" tabindex="-1" role="dialog">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4>{{khoahoc.ten_khoa_hoc}}</h4>
+													<img src="/media/{{khoahoc.img}}" alt="blog-image" />
+													<span>{{khoahoc.gioi_thieu}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- //Modal1 -->
+								</div>
+								<div class="media-body response-text-right">
+									<h5>{{khoahoc.ten_khoa_hoc}}</h5>
+									<ul>
+										<li><i class="fa fa-calendar" aria-hidden="true"></i> 20/11/2017</li>
+										</br>
+										<li><i class="fa fa-users" aria-hidden="true"></i> đăng kí : 7685</li>
+									</ul>
+									<p><a href="#"><i class="fa fa-eyes">Giới thiệu về khóa học</i></a></p>
+									<div class="read">
+										<a href="../../khoahoc/{{khoahoc.ma_khoa_hoc}}" class="view resw3">Chi tiết khóa học</a>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					{% endfor %}
+				{% endif %}
+				<div class="clearfix"> </div>
+			</div>
+	</div>
+</div>
+
+{% endblock %}
+

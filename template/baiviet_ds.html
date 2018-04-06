@@ -1,0 +1,119 @@
+{% extends "base1.html" %}
+{% block nd %}
+{% load static %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+<section class="content-header">
+      <h1>
+        Danh sách bài viết
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
+        <li class="active">Danh sách bài viết</li>
+      </ol>
+</section>
+<section class="content">
+    <div class="fluid">
+        <div class="form-group">
+            <a href="../baiviet_them"><button class="btn-sm btn-primary">Thêm bài viết</button></a>
+            <!--<button class="btn-sm btn-primary"><i class="glyphicon glyphicon-trash"></i></button>-->
+            <div class="pull-right">
+                <div class="form-inline panel panel-body">
+                    <div class="pull-right">
+                        <span class="step-links">
+                            {% if ds_baiviet.has_previous %}
+                                <a href="?page={{ ds_baiviet.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                            {% endif %}
+                        </span>
+
+                        <span class="current">
+                            Trang {{ ds_baiviet.number }} / {{ ds_baiviet.paginator.num_pages }}
+                        </span>
+
+                        <span>
+                            {% if ds_baiviet.has_next %}
+                                <a href="?page={{ ds_baiviet.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="panel">
+            <div class="panel-body">
+                <div class="box box-primary">
+                    <table class="table table-hover panel">
+                        <thead class="table-striped">
+                            <th>Mã bài viết</th>
+                            <th>Tên bài</th>
+                            <th>Nội dung</th>
+                            <th>Trạng thái</th>
+                            <!--<th>Lượt xem</th>-->
+                            <!--<th>Bình luận</th>-->
+                            <th>Khóa học</th>
+                            <th>Tác giả</th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                    {% if ds_baiviet %}
+                        <tbody class="table-striped">
+                        {% for baiviet in ds_baiviet %}
+                            <tr>
+                                <td>{{baiviet.ma_bai}}</td>
+                                <td>{{baiviet.ten_bai}}</td>
+                                <td><a href="#" data-toggle="modal" data-target="#{{baiviet.ma_bai}}"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                                <td>{{baiviet.trang_thai}}</td>
+                                <!--<td>{{baiviet.tong_so_view}}</td>-->
+                                <!--<td>{{baiviet.tong_so_binh_luan}}</td>-->
+                                <td>{{baiviet.khoa_hoc_id}}</td>
+                                <td>{{baiviet.tac_gia_id}}</td>
+                                <td><a href="../baiviet_sua/{{baiviet.ma_bai}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="../baiviet_xoa/{{baiviet.ma_bai}}"><i class="glyphicon glyphicon-trash"></i></a></td>
+                                <div id="{{baiviet.ma_bai}}" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <center>{{ baiviet.ten_bai }}</center>
+                                            <textarea name = "1" class="ckeditor">{{baiviet.noi_dung}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </tbody>
+
+                        {% endfor %}
+                    {% else %}
+                        <script>
+                            alert("không tìm được danh mục phù hợp, vui lòng nhập lại tìm kiếm");
+                            window.location="../baiviet_ds";
+                        </script>
+                    {% endif %}
+
+                    </table>
+                    <div class="pull-right">
+                        <ul class="pagination pagintion-sm">
+                            <div class="pagination">
+                                <span class="step-links">
+                                    {% if ds_baiviet.has_previous %}
+                                        <a href="?page={{ ds_baiviet.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                    {% endif %}
+                                </span>
+
+                                <span class="current">
+                                    Trang {{ ds_baiviet.number }} / {{ ds_baiviet.paginator.num_pages }}
+                                </span>
+
+                                <span>
+                                    {% if ds_baiviet.has_next %}
+                                        <a href="?page={{ ds_baiviet.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}

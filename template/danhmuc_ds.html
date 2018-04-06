@@ -1,0 +1,97 @@
+{% extends "base1.html" %}
+{% block nd %}
+<section class="content-header">
+      <h1>
+        Danh sách danh mục
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
+        <li class="active">Danh sách danh mục</li>
+      </ol>
+</section>
+<section class="content">
+    <div class="fluid">
+        <div class="form-group">
+            <a href="../danhmuc_them"><button class="btn-sm btn-primary">Thêm danh mục</button></a>
+            <!--<button class="btn-sm btn-primary"><i class="glyphicon glyphicon-trash"></i></button>-->
+            <div class="pull-right">
+                <div class="form-inline panel panel-body">
+                    <div class="pull-right">
+                        <span class="step-links">
+                            {% if ds_danhmuc.has_previous %}
+                                <a href="?page={{ ds_danhmuc.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                            {% endif %}
+                        </span>
+
+                        <span class="current">
+                            Trang {{ ds_danhmuc.number }} / {{ ds_danhmuc.paginator.num_pages }}
+                        </span>
+
+                        <span>
+                            {% if ds_danhmuc.has_next %}
+                                <a href="?page={{ ds_danhmuc.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="panel">
+            <div class="panel-body">
+                <div class="box box-primary">
+                    <table class="table table-hover panel">
+                        <thead class="table-striped">
+                            <th>Mã danh mục</th>
+                            <th>Tên danh mục</th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                    {% if ds_danhmuc %}
+                        <tbody class="table-striped">
+                        {% for danhmuc in ds_danhmuc %}
+                            <tr>
+                                <td>{{danhmuc.ma_chuyen_nganh}}</td>
+                                <td>{{danhmuc.ten_chuyen_nganh}}</td>
+                                <td><a href="../danhmuc_sua/{{danhmuc.ma_chuyen_nganh}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                <td><a href="../danhmuc_xoa/{{danhmuc.ma_chuyen_nganh}}"><i class="glyphicon glyphicon-trash"></i></a></td>
+                            </tr>
+                        </tbody>
+
+                        {% endfor %}
+                    {% else %}
+                        <script>
+                            alert("không tìm được danh mục phù hợp, vui lòng nhập lại tìm kiếm");
+                            window.location="../danhmuc_ds";
+                        </script>
+                    {% endif %}
+
+                    </table>
+                    <div class="pull-right">
+                        <ul class="pagination pagintion-sm">
+                            <div class="pagination">
+                                <span class="step-links">
+                                    {% if ds_danhmuc.has_previous %}
+                                        <a href="?page={{ ds_danhmuc.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                    {% endif %}
+                                </span>
+
+                                <span class="current">
+                                    Trang {{ ds_danhmuc.number }} / {{ ds_danhmuc.paginator.num_pages }}
+                                </span>
+
+                                <span>
+                                    {% if ds_danhmuc.has_next %}
+                                        <a href="?page={{ ds_danhmuc.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}

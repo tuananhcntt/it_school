@@ -1,0 +1,37 @@
+{% extends "base1.html" %}
+{% block nd %}
+
+{% load static %}
+<script src="{% static 'bootstrap/js/validator.min.js' %}"></script>
+    <!-- Modal content-->
+    <div class="">
+        <form role="form" data-toggle="validator" action="danhmuc_them" method="post" enctype="multipart/form-data" data-ajax="false">{% csrf_token %}
+        <hr>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Thêm danh mục</h4>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label>Mã danh mục:</label>
+                    <input type="text" name="txtma" readonly="False" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                    <label>Tên danh mục:</label>
+                    <input type="text" name="txttendm" id="txttendm" class="form-control" data-error="Không được để trống!" />
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" name="btnthemdm" value="Thêm danh mục">
+                </div>
+                {% if form.errors %}
+                    Co loi xay ra. {{ form.errors }}
+                {% endif %}
+            </div>
+        </div>
+        </div>
+    </form>
+    </div>
+{% endblock %}

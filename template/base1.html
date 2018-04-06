@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>IT school</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+  <link rel="stylesheet" href="{%static 'dist/css/skins/skin-blue-light.min.css' %}">
+  <link rel="stylesheet" href="{%static 'dist/css/skins/_all-skins.min.css' %}">
+</head>
+<body class="hold-transition skin-blue-light sidebar-mini">
+<div class="wrapper">
+  <header class="main-header">
+    <a href="{% url 'trangchu'%}" class="logo">
+      <span class="logo-mini">IT</span>
+      <span class="logo-lg"><b>IT School</b></span>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+
+          <!-- User Account Menu -->
+          {% if user %}
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img src="/media/{{user.img}}" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs">{{user.username}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-footer">
+                  <a href="../danhmuc_them" class="btn btn-default btn-flat"><button class="btn-block btn-primary">Tạo danh mục</button></a>
+                  <a href="../khoahoc_them" class="btn btn-default btn-flat"><button class="btn-block btn-primary">Tạo bài viết</button></a>
+                  <a href=../"baiviet_them" class="btn btn-default btn-flat"><button class="btn-block btn-primary">Tạo khoá học</button></a>
+                  <a href="../caidat" class="btn btn-default btn-flat"><button class="btn-block btn-primary">Cài đặt cá nhân</button></a>
+                  <a href="{% url 'trangchu'%}" class="btn btn-default btn-flat"><button type="submit" name="btnlogout" class="btn-block btn-primary">Đăng xuất</button></a>
+              </li>
+
+            </ul>
+          </li>
+          {% endif %}
+          <!-- Control Sidebar Toggle Button -->
+
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+
+      <!-- Sidebar user panel (optional) -->
+      {% if user %}
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/media/{{user.img}}" class="img-circle" alt="User Image"/>
+        </div>
+        <div class="pull-left info">
+          <p>{{user.username}}</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+      {% endif %}
+      <!-- search form (Optional) -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="{{ q }}">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header"><i class="glyphicon glyphicon-dashboard"></i>BẢNG ĐIỀU KHIỂN</li>
+        <li class="treeview">
+          <a href="{% url 'trangchu' %}"><i class="glyphicon glyphicon-home"></i><span> Chế độ khách</span></a>
+        </li>
+        {% if user.loai_user_id == 1 %}
+        <li class="treeview">
+          <a href="#">
+              <i class="glyphicon glyphicon-asterisk"></i> <span>DS thành viên</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-list"></i> <span>Danh mục</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../danhmuc_ds"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="../danhmuc_them"><i class="fa fa-circle-o"></i> Thêm danh mục</a></li>
+          </ul>
+        </li>
+        {% endif %}
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-list"></i> <span>Khóa học</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../khoahoc_ds"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="../khoahoc_them"><i class="fa fa-circle-o"></i> Thêm khóa học</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="glyphicon glyphicon-list-alt"></i> <span>Bài viết</span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../baiviet_ds"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+            <li><a href="../baiviet_them"><i class="fa fa-circle-o"></i> Thêm bài</a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+          <a href="#">
+              <i class="glyphicon glyphicon-asterisk"></i> <span>Tương tác</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+              <i class="glyphicon glyphicon-asterisk"></i> <span>Bình luận</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+              <i class="glyphicon glyphicon-asterisk"></i> <span>Cài đặt cá nhân</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="#">
+              <i class="glyphicon glyphicon-asterisk"></i> <span>Đăng xuất</span>
+          </a>
+        </li>
+        <!--<li class="treeview">-->
+          <!--<a href="#">-->
+              <!--<i class="glyphicon glyphicon-asterisk"></i> <span>Yeu cầu thanh toán</span>-->
+          <!--</a>-->
+        <!--</li>-->
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+
+    <div class="content-wrapper">
+        {% block nd %}{%endblock%}
+    </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="hidden-xs">
+      Hỗ trợ: 0968 747 838 | 0163 223 6307
+    </div>
+    <!-- Default to the left -->
+    <!--<strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.-->
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 2.2.3 -->
+<script src="{%static 'plugins/jQuery/jquery-2.2.3.min.js' %}"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="{%static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{%static 'dist/js/app.min.js' %}"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+    <script>
+  $(function(){
+    $('#checkall').click(function(event) {
+      if(this.checked) {
+          // Iterate each checkbox
+          $(':checkbox').each(function() {
+              this.checked = true;
+          });
+      }
+      else {
+        $(':checkbox').each(function() {
+              this.checked = false;
+          });
+      }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 from django import forms
 from django.db import models
-from  ckeditor.fields import RichTextField
+from ckeditor.fields import RichTextField
+from ckeditor.widgets import CKEditorWidget
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()

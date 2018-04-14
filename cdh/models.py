@@ -8,7 +8,7 @@ class LoaiUser(models.Model):
 class User(models.Model):
     username = models.CharField(primary_key=True, max_length=20)
     ho_ten = models.CharField(max_length=50)
-    mat_khau = models.CharField(max_length=20)
+    mat_khau = models.CharField(max_length=200)
     img = models.CharField(max_length=250)
     gioi_tinh = models.CharField(max_length=3)
     dia_chi = models.CharField(max_length=250)

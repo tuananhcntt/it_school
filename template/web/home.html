@@ -67,23 +67,23 @@
 				<p class="w3l_para">Kho kiến thức bất tận, bạn đã-đang và sẽ ở đây để cùng chúng tôi phát triển nguồn tri thức cộng đồng.</p>
 				<div class="w3l_social_icons">
 					<div class="w3l_social_icon_grid">
-						<div class="w3l_social_icon_gridl w3_facebook">
+						<div class="w3l_social_icon_gridl">
 							<a href="#">
-								<i class="fa fa-facebook" aria-hidden="true"></i>
+								<i class="fa fa-edit" aria-hidden="true"></i>
 							</a>
 						</div>
 						<div class="w3l_social_icon_gridr">
-							<p class="counter">1,512,986</p>
+							<p class="counter">158675</p>
 						</div>
 						<div class="clearfix"> </div>
 						<div class="w3l_social_icon_grid_pos">
-							<label>-</label>
+							<label>:</label>
 						</div>
 					</div>
 					<div class="w3l_social_icon_grid w3ls_social_icon_grid">
-						<div class="w3l_social_icon_gridl w3_dribbble">
+						<div class="w3l_social_icon_gridl">
 							<a href="#">
-								<i class="fa fa-dribbble" aria-hidden="true"></i>
+								<i class="fa fa-book" aria-hidden="true"></i>
 							</a>
 						</div>
 						<div class="w3l_social_icon_gridr">
@@ -91,13 +91,13 @@
 						</div>
 						<div class="clearfix"> </div>
 						<div class="w3l_social_icon_grid_pos">
-							<label>-</label>
+							<label>:</label>
 						</div>
 					</div>
 					<div class="w3l_social_icon_grid">
-						<div class="w3l_social_icon_gridl w3_instagram">
+						<div class="w3l_social_icon_gridl">
 							<a href="#">
-								<i class="fa fa-instagram" aria-hidden="true"></i>
+								<i class="fa fa-address-book" aria-hidden="true"></i>
 							</a>
 						</div>
 						<div class="w3l_social_icon_gridr">
@@ -105,7 +105,7 @@
 						</div>
 						<div class="clearfix"> </div>
 						<div class="w3l_social_icon_grid_pos">
-							<label>-</label>
+							<label>:</label>
 						</div>
 					</div>
 				</div>
@@ -134,19 +134,96 @@
 			<div class="why-choose-agile-grids-top">
 				{% if ds_chuyen_nganh %}
 				<div class="col-md-12 agileits-w3layouts-grid">
-					<div class="wthree_agile_us">
-						{% for chuyen_nganh in ds_chuyen_nganh %}
-							<div class="col-md-1 agile-why-text">
-								<div class="wthree_features_grid">
-									<i class="fa fa-laptop" aria-hidden="true"></i>
+					<div class="col-md-6 agileits_banner_bottom_right">
+
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+							</div>
+							<div class="col-md-6 w3ls_banner_bottom_right">
+								<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+								<div class="w3ls_banner_bottom_right_pos">
+									<img src="{% static 'images/1.jpg' %}" alt=" " class="img-responsive" />
 								</div>
 							</div>
-							<div class="col-md-5 agile-why-text">
-								<a href="../danhmuc/{{chuyen_nganh.ma_chuyen_nganh}}"><h4>{{chuyen_nganh.ten_chuyen_nganh}}</h4></a>
-								<p></p>
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+								</div>
+								<div class="col-md-6">
+									</br>
+									</br>
+									<h1><span>Information</span></h1>
+								</div>
+							</div>
+							<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="">
+									</br>
+									</br>
+									<h1><span>Technology</span></h1>
+								</div>
+							</div>
+							<div class="col-md-6 w3ls_banner_bottom_right">
+								<div class="">
+									<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+									<div class="w3ls_banner_bottom_right_pos">
+										<!--<img src="{% static 'images/1.jpg' %}" alt=" " class="img-responsive" />-->
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+							</div>
+							<div class="col-md-6 w3ls_banner_bottom_right">
+								<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+								<div class="w3ls_banner_bottom_right_pos">
+									<img src="{% static 'images/1.jpg' %}" alt=" " class="img-responsive" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="w3l_social_icons col-md-6">
+						<div class="w3l_social_icon_gridl w3_facebook">
+							<i class="fa fa-globe" aria-hidden="true"></i>
+						</div>
+						<div class="w3l_social_icon_gridl w3_facebook">
+							<i class="fa fa-mobile" aria-hidden="true"></i>
+						</div>
+						<div class="w3l_social_icon_gridl w3_facebook">
+							<i class="fa fa-bug" aria-hidden="true"></i>
+						</div>
+						<div class="w3l_social_icon_gridl w3_facebook">
+							<!--<i class="fa fa-wifi" aria-hidden="true"></i>-->
+							<i class="fa fa-rss" aria-hidden="true"></i>
+						</div>
+						<div class="w3l_social_icon_gridl w3_facebook">
+							<!--<i class="fa fa-wrench" aria-hidden="true"></i>-->
+							<i class="fa fa-tv" aria-hidden="true"></i>
+						</div>
+						<div class="clearfix"> </div>
+						{% for chuyen_nganh in ds_chuyen_nganh %}
+							<div class="w3l_social_icon_grid w3ls_social_icon_grid">
+								<div class="w3l_social_icon_gridl w3_facebook">
+									<i class="fa fa-check-circle-o" aria-hidden="true"></i>
+								</div>
+
+								<div class="w3l_social_icon_grid_pos">
+									<h3><a href="../danhmuc/{{chuyen_nganh.ma_chuyen_nganh}}">{{chuyen_nganh.ten_chuyen_nganh}}</a></h3>
+								</div>
+								<div class="clearfix"> </div>
 							</div>
 						{% endfor %}
+
+							<h1><span>CHOOL</span></h1>
+
 					</div>
+
 				</div>
 				{% endif %}
 				<div class="clearfix"> </div>

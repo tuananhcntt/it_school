@@ -1,65 +1,65 @@
-{% extends "base1.html" %}
+{% extends "baseadmin.html" %}
 {% block nd %}
 {% load static %}
 <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
-<section class="content-header">
-  <h1>
-    Cập nhật bài viết
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
-    <li class="active">Cập nhật bài viết</li>
-  </ol>
-</section>
-<section class="content">
-    <form action="" method="post" enctype="multipart/form-data" data-ajax="false">{% csrf_token %}
-      <div class="row">
-        <div class="col-md-8">
-          <div class="box box-default">
-            <div class="form-group">
-              <div class="">
-                <input type="text" class="form-control input-lg" name="txttenbai" placeholder="Tiêu đề bài viết" value="{{baiviet.ten_bai}}"/>
+<div class="container" style="min-height: 600px">
+    <section class="content-header">
+
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
+        <li class="active">Cập nhật bài viết</li>
+      </ol>
+    </section>
+    <section class="content">
+        <form action="" method="post" enctype="multipart/form-data" data-ajax="false">{% csrf_token %}
+          <div class="row">
+            <div class="col-md-8">
+              <div class="box box-default">
+                <div class="form-group">
+                  <div class="">
+                    <input type="text" class="form-control input-lg" name="txttenbai" placeholder="Tiêu đề bài viết" value="{{baiviet.ten_bai}}"/>
+                  </div>
+                </div>
+              </div>
+              <div class="box box-default">
+                <div class="box-header">
+                  <h3 class="box-title">Nội dung bài viết
+                    <small>Tạo sự khác biệt với khung soạn thảo nội dung</small>
+                  </h3>
+                </div>
+
+                <div class="box-body pad">
+                   <textarea name="txtnoidung" id="txtnoidung">
+                       {{ baiviet.noi_dung }}
+                   </textarea>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="box box-default">
-            <div class="box-header">
-              <h3 class="box-title">Nội dung bài viết
-                <small>Tạo sự khác biệt với khung soạn thảo nội dung</small>
-              </h3>
+            <div class="col-md-4">
+              <div class="box box-default">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Khóa học</label>
+                        <select name="select_khoahoc" id="select_khoahoc" class="form-control">
+                        {% if ds_khoahoc %}
+                            {% for khoa_hoc in ds_khoahoc %}
+                                <option value="{{khoa_hoc.ma_khoa_hoc}}">{{khoa_hoc.ten_khoa_hoc}}</option>
+                            {% endfor %}
+                        {% endif %}
+                        </select>
+                    </div>
+                    </br>
+                    <div clas="form-group right">
+                        <input type="submit" class="btn-sm btn-warming" name="btnLuu" value="Hủy đăng"/>
+                        <input type="submit" class="btn-sm btn-primary" name="btnDang" value="Đăng bài"/>
+                    </div>
+                </div>
+              </div>
             </div>
 
-            <div class="box-body pad">
-               <textarea name="txtnoidung" id="txtnoidung" rows="10" cols="80">
-                   {{ baiviet.noidung }}
-               </textarea>
-            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-body">
-                <div class="form-group">
-                    <label>Khóa học</label>
-                    <select name="select_khoahoc" id="select_khoahoc" class="form-control">
-                    {% if ds_khoahoc %}
-                        {% for khoa_hoc in ds_khoahoc %}
-                            <option value="{{khoa_hoc.ma_khoa_hoc}}">{{khoa_hoc.ten_khoa_hoc}}</option>
-                        {% endfor %}
-                    {% endif %}
-                    </select>
-                </div>
-                </br>
-                <div clas="form-group right">
-                    <input type="submit" class="btn-sm btn-warming" name="btnLuu" value="Hủy đăng"/>
-                    <input type="submit" class="btn-sm btn-primary" name="btnDang" value="Đăng bài"/>
-                </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </form>
-</section>
+        </form>
+    </section>
+</div>
 <script>CKEDITOR.replace( 'txtnoidung' );</script>
 {% endblock %}

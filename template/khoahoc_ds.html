@@ -1,43 +1,106 @@
-{% extends "base1.html" %}
+{% extends "baseadmin.html" %}
 {% block nd %}
-<section class="content-header">
-      <h1>
-        Danh sách khóa học
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
-        <li class="active">Danh sách khóa học</li>
-      </ol>
-</section>
-<section class="content">
-    <div class="fluid">
-        <div class="form-group">
-            <a href="../khoahoc_them"><button class="btn-sm btn-primary">Thêm khóa học</button></a>
-            <div class="pull-right">
-                <div class="form-inline panel panel-body">
-                    <div class="pull-right">
-                        <span class="step-links">
-                            {% if ds_khoahoc.has_previous %}
-                                <a href="?page={{ ds_khoahoc.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                            {% endif %}
-                        </span>
+{% load static %}
+<div class="container" style="min-height: 600px">
+    <section class="content-header">
 
-                        <span class="current">
-                            Trang {{ ds_khoahoc.number }} / {{ ds_khoahoc.paginator.num_pages }}
-                        </span>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
+            <li class="active">Danh sách khóa học</li>
+          </ol>
+    </section>
+    <section class="content">
+        <div class="fluid">
+            <div class="form-group">
+                <a href="../khoahoc_them"><button class="btn-sm btn-primary">Thêm khóa học</button></a>
+                <div class="pull-right">
+                    <ul class="nav nav-tabs">
 
-                        <span>
-                            {% if ds_khoahoc.has_next %}
-                                <a href="?page={{ ds_khoahoc.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                        {% if user.loai_user_id == 0 or user.loai_user_id == 1 %}
+                            <li><a data-toggle="tab" href="#canhan"><i class="fa fa-user"></i></a></li>
+                            <li class="active"><a data-toggle="tab" href="#congdong"><i class="fa fa-globe"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content">
+        {% if user.loai_user_id == 0 or user.loai_user_id == 1 %}
+            <div class="tab-pane fade in active" id="congdong">
+                <div class="">
+                    <div class="box box-primary">
+                        <table class="table table-hover panel">
+                            <thead>
+                                <th>Mã khóa học</th>
+                                <th>Tên khóa học</th>
+                                <th>Ảnh</th>
+                                <th>Giới thiệu</th>
+                                <th>Chuyên nghành</th>
+                                <th>Tác giả</th>
+                                <th></th>
+                                <th></th>
+                            </thead>
+                            {% if ds_khoahoc %}
+                                <tbody>
+                                {% for khoahoc in ds_khoahoc %}
+
+                                    <tr>
+                                        <td>{{khoahoc.ma_khoa_hoc}}</td>
+                                        <td>{{khoahoc.ten_khoa_hoc}}</td>
+                                        <td><img height="25px" width="40px" class="img-rounded" src="/media/{{ khoahoc.img }}" /></td>
+                                        <!--<td>{{khoahoc.gioi_thieu}}</td>-->
+                                        <td><a href="#" data-toggle="modal" data-target="#{{khoahoc.ma_khoa_hoc}}"><i data-for="" class="glyphicon glyphicon-eye-open"></i></a></td>
+                                        <td>{{khoahoc.chuyen_nganh_id}}</td>
+                                        <td>{{khoahoc.tac_gia_id}}</td>
+                                        <td><a href="../khoahoc_sua/{{khoahoc.ma_khoa_hoc}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                        <td><a href="../khoahoc_xoa/{{khoahoc.ma_khoa_hoc}}"><i class="glyphicon glyphicon-trash"></i></a></td>
+                                        <div id="{{khoahoc.ma_khoa_hoc}}" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <center>{{ khoahoc.ten_khoa_hoc }}</center>
+                                                    {% load static %}
+                                                    <script src="{% static 'ckeditor_mini/ckeditor.js' %}"></script>
+                                                    <pre>{{khoahoc.gioi_thieu}}</pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+
+                                {% endfor %}
+                                </tbody>
+                                {% else %}
+                                    <script>
+                                        alert("không tồn tại khóa học trong hệ thống");
+
+                                    </script>
                             {% endif %}
-                        </span>
+
+                        </table>
+                        <div class="pull-right">
+                            <ul class="pagination pagintion-sm">
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if ds_khoahoc.has_previous %}
+                                            <a href="?page={{ ds_khoahoc.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                        {% endif %}
+                                    </span>
+
+                                    <span class="current">
+                                        Trang {{ ds_khoahoc.number }} / {{ ds_khoahoc.paginator.num_pages }}
+                                    </span>
+
+                                    <span>
+                                        {% if ds_khoahoc.has_next %}
+                                            <a href="?page={{ ds_khoahoc.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="tab-pane fade" id="canhan">
 
-            <div class="panel">
-            <div class="panel-body">
                 <div class="box box-primary">
                     <table class="table table-hover panel">
                         <thead>
@@ -47,17 +110,17 @@
                             <th>Giới thiệu</th>
                             <th>Chuyên nghành</th>
                             <th>Tác giả</th>
-                            <td></td>
-                            <td></td>
+                            <th></th>
+                            <th></th>
                         </thead>
-                        {% if ds_khoahoc %}
+                        {% if ds_khoahoc_user %}
                             <tbody>
-                            {% for khoahoc in ds_khoahoc %}
+                            {% for khoahoc in ds_khoahoc_user %}
 
                                 <tr>
                                     <td>{{khoahoc.ma_khoa_hoc}}</td>
                                     <td>{{khoahoc.ten_khoa_hoc}}</td>
-                                    <td><img height="25px" class="img-rounded" src="/media/{{ khoahoc.img }}" /></td>
+                                    <td><img height="25px" width="40px" class="img-rounded" src="/media/{{ khoahoc.img }}" /></td>
                                     <!--<td>{{khoahoc.gioi_thieu}}</td>-->
                                     <td><a href="#" data-toggle="modal" data-target="#{{khoahoc.ma_khoa_hoc}}"><i data-for="" class="glyphicon glyphicon-eye-open"></i></a></td>
                                     <td>{{khoahoc.chuyen_nganh_id}}</td>
@@ -68,7 +131,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <center>{{ khoahoc.ten_khoa_hoc }}</center>
-                                                {% load static %}
+
                                                 <script src="{% static 'ckeditor_mini/ckeditor.js' %}"></script>
                                                 <pre>{{khoahoc.gioi_thieu}}</pre>
                                             </div>
@@ -78,39 +141,116 @@
 
                             {% endfor %}
                             </tbody>
+
+                        {% endif %}
+
+                    </table>
+                    <div class="pull-right">
+                            <ul class="pagination pagintion-sm">
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if ds_khoahoc_user.has_previous %}
+                                            <a href="?page={{ ds_khoahoc_user.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                        {% endif %}
+                                    </span>
+
+                                    <span class="current">
+                                        Trang {{ ds_khoahoc_user.number }} / {{ ds_khoahoc_user.paginator_user.num_pages }}
+                                    </span>
+
+                                    <span>
+                                        {% if ds_khoahoc_user.has_next %}
+                                            <a href="?page={{ ds_khoahoc_user.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </ul>
+                        </div>
+                </div>
+
+            </div>
+
+        {% elif user.loai_user_id == 2 %}
+
+            <div class="tab-pane fade in active" id="canhan">
+
+                <div class="box box-primary">
+                    <table class="table table-hover panel">
+                        <thead>
+                            <th>Mã khóa học</th>
+                            <th>Tên khóa học</th>
+                            <th>Ảnh</th>
+                            <th>Giới thiệu</th>
+                            <th>Chuyên nghành</th>
+                            <th>Tác giả</th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                        {% if ds_khoahoc_user %}
+                            <tbody>
+                            {% for khoahocs in ds_khoahoc_user %}
+
+                                <tr>
+                                    <td>{{khoahocs.ma_khoa_hoc}}</td>
+                                    <td>{{khoahocs.ten_khoa_hoc}}</td>
+                                    <td><img height="25px" width="40px" class="img-rounded" src="/media/{{ khoahocs.img }}" /></td>
+                                    <!--<td>{{khoahoc.gioi_thieu}}</td>-->
+                                    <td><a href="#" data-toggle="modal" data-target="#{{khoahocs.ma_khoa_hoc}}"><i data-for="" class="glyphicon glyphicon-eye-open"></i></a></td>
+                                    <td>{{khoahocs.chuyen_nganh_id}}</td>
+                                    <td>{{khoahocs.tac_gia_id}}</td>
+                                    <td><a href="../khoahoc_sua/{{khoahocs.ma_khoa_hoc}}"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                    <td><a href="../khoahoc_xoa/{{khoahocs.ma_khoa_hoc}}"><i class="glyphicon glyphicon-trash"></i></a></td>
+                                    <div id="{{khoahocs.ma_khoa_hoc}}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <center>{{ khoahocs.ten_khoa_hoc }}</center>
+                                                {% load static %}
+                                                <script src="{% static 'ckeditor_mini/ckeditor.js' %}"></script>
+                                                <pre>{{khoahocs.gioi_thieu}}</pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </tr>
+
+                            {% endfor %}
+                            </tbody>
                             {% else %}
                                 <script>
-                                    alert("không có khoá học nào trong hệ thống, bạn có muốn thêm mới không?");
-                                    window.location="../khoahoc_ds";
+                                    alert("Bạn chưa có khoá học nào trong hệ thống");
+
                                 </script>
                         {% endif %}
 
                     </table>
                     <div class="pull-right">
-                        <ul class="pagination pagintion-sm">
-                            <div class="pagination">
-                                <span class="step-links">
-                                    {% if ds_khoahoc.has_previous %}
-                                        <a href="?page={{ ds_khoahoc.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                                    {% endif %}
-                                </span>
+                            <ul class="pagination pagintion-sm">
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if ds_khoahoc_user.has_previous %}
+                                            <a href="?page={{ ds_khoahoc_user.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                        {% endif %}
+                                    </span>
 
-                                <span class="current">
-                                    Trang {{ ds_khoahoc.number }} / {{ ds_khoahoc.paginator.num_pages }}
-                                </span>
+                                    <span class="current">
+                                        Trang {{ ds_khoahoc_user.number }} / {{ ds_khoahoc_user.paginator_user.num_pages }}
+                                    </span>
 
-                                <span>
-                                    {% if ds_khoahoc.has_next %}
-                                        <a href="?page={{ ds_khoahoc.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
-                                    {% endif %}
-                                </span>
-                            </div>
-                        </ul>
-                    </div>
+                                    <span>
+                                        {% if ds_khoahoc_user.has_next %}
+                                            <a href="?page={{ ds_khoahoc_user.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </ul>
+                        </div>
                 </div>
+
+            </div>
+
+        {% endif %}
+
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
+</div>
 {%endblock%}

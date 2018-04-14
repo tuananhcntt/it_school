@@ -25,7 +25,14 @@
 	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
 	    rel='stylesheet' type='text/css'>
 	<link href="//fonts.googleapis.com/css?family=Raleway:100i,200,200i,300,400,500,500i,600,700,700i,800,800i" rel="stylesheet">
-
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.12&appId=1250760148379260&autoLogAppEvents=1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 </head>
 <body>
 	<div class="agileits_w3layouts_banner_nav">
@@ -192,17 +199,21 @@
 				<div class="col-md-4 w3_agile_footer_grid">
 					<h3>Danh mục</h3>
 					<ul class="agileits_w3layouts_footer_grid_list">
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="index.html">Home</a></li>
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="about.html">Giới thiệu</a></li>
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="portfolio.html">Chuyên nghành</a></li>
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="contact.html">Liên hệ</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="{% url 'trangchu' %}">Home</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="{% url 'lienhe' %}">Liên hệ</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="{% url 'index' %}">Truy cập quản lí</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4 w3_agile_footer_grid">
 					<h3>Ban quản trị</h3>
 					<div class="w3_agileits_footer_grid_left">
 						<a href="#" data-toggle="modal" data-target="#myModal">
-							<img src="images/f1.jpg" alt=" " class="img-responsive" />
+							<img src="{% static 'images/f1.jpg' %}" alt=" " class="img-responsive" />
+						</a>
+					</div>
+					<div class="w3_agileits_footer_grid_left">
+						<a href="#" data-toggle="modal" data-target="#myModal">
+							<img src="{% static 'images/f1.jpg' %}" alt=" " class="img-responsive" />
 						</a>
 					</div>
 
@@ -213,7 +224,7 @@
 			</div>
 
 			<div class="agileinfo_copyright">
-				<p>Hỗ trợ IT-school: <a href="https://facebook.com/lantucntt">facebook.com/langtucntt</a></p>
+				<p>Hỗ trợ IT-school: <a href="https://facebook.com/cungnhauhocweb">facebook.com/cungnhauhocweb</a></p>
 			</div>
 		</div>
 	</div>
@@ -363,7 +374,7 @@
 			});
 
 		});
-	</script>-->
+	</script>
 	<!-- //flexisel -->
 	<!-- //flexisel -->
 	<!-- js for portfolio lightbox -->

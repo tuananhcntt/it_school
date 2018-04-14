@@ -9,14 +9,9 @@
 	<div class="container">
 		<div class="col-md-6 w3layouts_about_grid_left">
 			<div class="w3_about_grid">
-				<center><img class="img-circle" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" /></center>
+				<center><img width="100%" class="img-thumbnail" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" /></center>
 			</div>
-			<div class="col-md-6 w3layouts_about_grid_left1">
-				<img class="img-circle" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" />
-			</div>
-			<div class="col-md-6 w3layouts_about_grid_left1">
-				<img class="img-circle" src="/media/{{ khoa_hoc.img }}" alt=" " class="img-responsive" />
-			</div>
+
 			<div class="clearfix"> </div>
 		</div>
 		<div class="col-md-6 w3layouts_about_grid_right">
@@ -62,8 +57,10 @@
 <div class="clearfix"> </div>
 <div class="services">
 	<div class="container">
-		<div class="w3l-news_info_agile_its">
-				{% if ct_bai_viet%}
+		{% if ct_bai_viet%}
+			<div class="w3l-news_info_agile_its">
+
+					<div class="fb-like" data-href="http://127.0.0.1:8000/baiviet/10/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
                     <div class="dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
@@ -71,13 +68,21 @@
                                 <h4>{{ct_bai_viet.ten_bai}}</h4>
                                 <span>{{ct_bai_viet.noi_dung}}</span>
                             </div>
+
                         </div>
                     </div>
-				{% endif %}
+
+				<hr>
+				<div class="fb-like" data-href="http://facebook.com/cungnhauhocweb" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+				<br>
+				<div class="fb-comments" data-href="http://127.0.0.1:8000/baiviet/10/" data-numposts="10"></div>
+
 				<div class="clearfix"> </div>
 			</div>
+		{% endif %}
 	</div>
 </div>
+<hr>
 <div class="services">
 	<div class="container">
 		<h3 class="tittle_agile_w3">Có thể bạn sẽ cần</h3>

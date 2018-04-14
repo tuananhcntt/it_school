@@ -1,0 +1,93 @@
+{% extends "baseadmin.html" %}
+{% block nd %}
+<div class="container" style="min-height: 600px">
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
+          {% if user.loai_user_id == 0 %}
+            <li class="active">Danh sách admin</li>
+          {% elif user.loai_user_id == 1 %}
+            <li class="active">Danh sách người dùng</li>
+          {% endif %}
+        </ol>
+    </section>
+    <section class="content">
+        <div class="fluid">
+            <div class="form-group">
+                {% if user.loai_user_id == 0 %}
+                    <a href="../nguoidung_them"><button class="btn-sm btn-primary">Thêm admin</button></a>
+                {% endif %}
+                <!--<button class="btn-sm btn-primary"><i class="glyphicon glyphicon-trash"></i></button>-->
+                <div class="pull-right">
+
+                </div>
+            </div>
+
+                <div class="panel">
+                <div class="">
+                    <div class="box box-primary">
+                        <table class="table table-hover panel">
+                            <thead class="table-striped">
+                                <th>Username</th>
+                                <th>Họ tên</th>
+                                <th>Ảnh</th>
+                                <th>Giới tính</th>
+                                <th>Địa chỉ</th>
+                                <th>Quyền</th>
+                                <th></th>
+                            </thead>
+                        {% if ds_nguoidung %}
+                            <tbody class="table-striped">
+                            {% for nguoidung in ds_nguoidung %}
+                                <tr>
+                                    <td>{{nguoidung.username}}</td>
+                                    <td>{{nguoidung.ho_ten}}</td>
+                                    <td><img height="25px" width="40px" class="img-rounded" src="/media/{{ nguoidung.img }}" /></td>
+                                    <td>{{nguoidung.gioitinh}}</td>
+                                    <td>{{nguoidung.diachi}}</td>
+                                    {% if nguoidung.loai_user_id == 1 %}
+                                        <td>admin</td>
+                                    {% elif nguoidung.loai_user_id == 2 %}
+                                        <td>user</td>
+                                    {% endif %}
+                                    <td><a href="../nguoidung_xoa/{{nguoidung.username}}"><i class="glyphicon glyphicon-trash"></i></a></td>
+                                </tr>
+                            </tbody>
+
+                            {% endfor %}
+                        {% else %}
+                            <script>
+                                alert("không tồn tại người dùng");
+
+                            </script>
+                        {% endif %}
+
+                        </table>
+                        <div class="pull-right">
+                            <ul class="pagination pagintion-sm">
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if ds_nguoidung.has_previous %}
+                                            <a href="?page={{ ds_nguoidung.previous_page_number }}"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                        {% endif %}
+                                    </span>
+
+                                    <span class="current">
+                                        Trang {{ ds_nguoidung.number }} / {{ ds_nguoidung.paginator.num_pages }}
+                                    </span>
+
+                                    <span>
+                                        {% if ds_nguoidung.has_next %}
+                                            <a href="?page={{ ds_nguoidung.next_page_number }}"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{%endblock%}

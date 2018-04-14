@@ -3,9 +3,12 @@ from django.template import loader
 from django.shortcuts import redirect
 from cdh.models import BaiViet, KhoaHoc, User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import hashlib
 
 
 def index(request, bai_viet_id):
+    if not request.session.has_key('username'):
+        return redirect('trangchu')
     ct_bai_viet = BaiViet.objects.get(pk=bai_viet_id)
     khoa_hoc = KhoaHoc.objects.get(pk=ct_bai_viet.khoa_hoc_id)
     ds_khoa_hoc = KhoaHoc.objects.filter(chuyen_nganh_id = khoa_hoc.chuyen_nganh_id)[:4]
@@ -27,18 +30,22 @@ def index(request, bai_viet_id):
     if request.session.has_key('username'):
         username = request.session['username']
         user = User.objects.get(username=username)
+        if request.GET.get("btnlogout"):
+            del request.session['username']
+            user = ""
+            return redirect('trangchu')
     if request.GET.get("btnlogin"):
-        username = request.GET.get('username')
-        matkhau = request.GET.get('password')
+        u = User()
+        u.username = request.GET['username']
+        u.mat_khau = request.GET['password']
+        u.mat_khau = hashlib.sha256(b"u.mat_khau").hexdigest()
         try:
-            user = User.objects.get(username=username, mat_khau=matkhau)
-            request.session['username'] = user.username
+            user = User.objects.get(username=u.username, mat_khau=u.mat_khau)
         except:
             user = ""
+        return redirect('trangchu')
 
-    if request.GET.get("btnlogout"):
-        del request.session['username']
-        user = ""
+
     context = {
         "khoa_hoc": khoa_hoc,
         "ct_bai_viet": ct_bai_viet,

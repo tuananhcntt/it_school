@@ -1,4 +1,154 @@
-{% extends "base1.html" %}
+{% extends "baseadmin.html" %}
 {% block nd %}
-    <h1>Chào mừng tham gia hệ thống quản trị</h1>
+{% load static %}
+
+    <div class="banner-bottom">
+		<div class="container">
+			<div class="mid_agile_bannner_top_info">
+                <div class="heading-underline">
+					<div class="h-u1"></div>
+					<div class="h-u2"></div>
+					<div class="h-u3"></div>
+					<div class="clearfix"></div>
+				</div>
+				<h3>Bạn đang tham gia vào hệ thống phát triển IT school</h3>
+				<p>Hãy đem lại lợi ích cho mọi người và trách nhiệm với những gì mình tạo ra</p>
+			</div>
+			<div class="col-md-6 agileits_banner_bottom_left">
+				<h4>Bạn có thể làm gì với <span>   IT</span></h4>
+				<p class="w3l_para">Ở đây bạn có thể mở ra các khóa học, mỗi khóa học hãy theo một chủ đề nhất định. Và sau đó hãy tạo ra những bài viết của mỗi khóa học đó.</br>
+                Hiện tại chúng tôi cung cấp cho các bạn 5 danh mục để có sự sắp sếp phù hợp cho các khóa học, điều này sẽ làm hệ thống của chuáng ta trở nên khoa học và tiện lợi hơn cho công cuộc tìm kiếm.</p>
+				<div class="w3l_social_icons">
+					<div class="w3l_social_icon_grid">
+						<div class="w3l_social_icon_gridl w3_instagram">
+							<a href="#">
+								<i class="fa fa-globe" aria-hidden="true"></i>
+							</a>
+						</div>
+                        <div class="w3l_social_icon_grid_pos">
+							<label><i class="fa fa-check"></i></label>
+						</div>
+						<div class="w3l_social_icon_gridr">
+                            <p>Công nghệ web</p>
+						</div>
+						<div class="clearfix"> </div>
+
+					</div>
+					<div class="w3l_social_icon_grid w3ls_social_icon_grid">
+						<div class="w3l_social_icon_gridl w3_instagram">
+							<a href="#">
+								<i class="fa fa-tablet" aria-hidden="true"></i>
+							</a>
+						</div>
+						<div class="w3l_social_icon_grid_pos">
+							<label><i class="fa fa-check"></i></label>
+						</div>
+						<div class="w3l_social_icon_gridr">
+                            <p>Công nghệ di động</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="w3l_social_icon_grid">
+						<div class="w3l_social_icon_gridl w3_instagram">
+							<a href="#">
+								<i class="fa fa-bug" aria-hidden="true"></i>
+							</a>
+						</div>
+						<div class="w3l_social_icon_grid_pos">
+							<label><i class="fa fa-check"></i></label>
+						</div>
+						<div class="w3l_social_icon_gridr">
+                            <p>Kiểm thử phần mềm</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+                    <div class="w3l_social_icon_grid w3ls_social_icon_grid">
+						<div class="w3l_social_icon_gridl w3_instagram">
+							<a href="#">
+								<i class="fa fa-rss" aria-hidden="true"></i>
+							</a>
+						</div>
+						<div class="w3l_social_icon_grid_pos">
+							<label><i class="fa fa-check"></i></label>
+						</div>
+						<div class="w3l_social_icon_gridr">
+                            <p>Mạng máy tính</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+                    <div class="w3l_social_icon_grid">
+						<div class="w3l_social_icon_gridl w3_instagram">
+							<a href="#">
+								<i class="fa fa-wrench" aria-hidden="true"></i>
+							</a>
+						</div>
+						<div class="w3l_social_icon_grid_pos">
+							<label><i class="fa fa-check"></i></label>
+						</div>
+						<div class="w3l_social_icon_gridr">
+                            <p>Kỹ thuật máy tính</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+            <div class="col-md-6 agileits_banner_bottom_right">
+
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+                    </div>
+                    <div class="col-md-6 w3ls_banner_bottom_right">
+                        <img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+                        <div class="w3ls_banner_bottom_right_pos">
+                            <img src="{% static 'images/1.jpg' %}" alt=" " class="img-responsive" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+                        </div>
+						<div class="col-md-6">
+							</br>
+							</br>
+							<h1><span>Information</span></h1>
+						</div>
+                    </div>
+					<div class="col-md-12">
+                    <div class="col-md-6">
+						<div class="">
+							</br>
+							</br>
+							<h1><span>Technology</span></h1>
+						</div>
+					</div>
+					<div class="col-md-6 w3ls_banner_bottom_right">
+						<div class="">
+							<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+							<div class="w3ls_banner_bottom_right_pos">
+								<!--<img src="{% static 'images/1.jpg' %}" alt=" " class="img-responsive" />-->
+							</div>
+						</div>
+                    </div>
+                </div>
+                </div>
+
+				<div class="col-md-12">
+                    <div class="col-md-6">
+						<img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+					</div>
+					<div class="col-md-6 w3ls_banner_bottom_right">
+                        <img src="{% static 'images/2.jpg' %}" alt=" " class="img-responsive" />
+                        <div class="w3ls_banner_bottom_right_pos">
+                            <img src="{% static 'images/1.jpg' %}" alt=" " class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+            	<div class="col-md-12">
+					<h1><span>CHOOL</span></h1>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
 {% endblock %}

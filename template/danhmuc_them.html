@@ -1,10 +1,10 @@
-{% extends "base1.html" %}
+{% extends "baseadmin.html" %}
 {% block nd %}
 
 {% load static %}
 <script src="{% static 'bootstrap/js/validator.min.js' %}"></script>
     <!-- Modal content-->
-    <div class="">
+    <div class="container" style="min-height: 600px">
         <form role="form" data-toggle="validator" action="danhmuc_them" method="post" enctype="multipart/form-data" data-ajax="false">{% csrf_token %}
         <hr>
         <div class="col-md-2"></div>

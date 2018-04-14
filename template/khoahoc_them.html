@@ -1,102 +1,103 @@
-{% extends "base1.html" %}
+{% extends "baseadmin.html" %}
 {% block nd %}
 {% load static %}
 <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+<div class="container" style="min-height: 600px">
+    <section class="content-header">
+      <h1>
+        Tạo khóa học
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
+        <li class="active">Tạo khóa học</li>
+      </ol>
+    </section>
+    <section class="content">
+        <form action="" method="post" enctype="multipart/form-data" data-ajax="false">{% csrf_token %}
+          <div class="row">
+            <div class="col-md-8">
+              <div class="box box-default">
+                <div class="form-group">
+                  <div class="">
+                    <input type="text" class="form-control input-lg" name="txttieude" placeholder="Tiêu đề"/>
+                  </div>
+                </div>
+              </div>
+              <div class="box box-default">
+                <div class="box-header">
+                  <h3 class="box-title">Giới thiệu
+                    <small>Tạo sự khác biệt với khung soạn thảo nội dung</small>
+                  </h3>
+                </div>
 
-<section class="content-header">
-  <h1>
-    Tạo khóa học
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> mange</a></li>
-    <li class="active">Tạo khóa học</li>
-  </ol>
-</section>
-<section class="content">
-    <form action="" method="post" enctype="multipart/form-data" data-ajax="false">{% csrf_token %}
-      <div class="row">
-        <div class="col-md-8">
-          <div class="box box-default">
-            <div class="form-group">
-              <div class="">
-                <input type="text" class="form-control input-lg" name="txttieude" placeholder="Tiêu đề"/>
+                <div class="box-body pad">
+                   <textarea name="txtgioithieu" id="txtgioithieu" rows="10" cols="80"></textarea>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="box box-default">
-            <div class="box-header">
-              <h3 class="box-title">Giới thiệu
-                <small>Tạo sự khác biệt với khung soạn thảo nội dung</small>
-              </h3>
-            </div>
+            <div class="col-md-4">
+              <div class="box box-default">
+                <div class="box-body">
+                    <div clas="form-group">
+                        <label>Chọn ảnh đại diện</label>
+                        <input type="file" class="form-control" name="txtfile"/>
+                    </div><br>
+                    <div class="form-group">
+                        <label>Danh mục</label>
+                        <select name="select_danhmuc" id="select_danhmuc" class="form-control">
+                        {% if ds_chuyennganh %}
+                            {% for chuyen_nganh in ds_chuyennganh %}
+                                <option value="{{chuyen_nganh.ma_chuyen_nganh}}">{{chuyen_nganh.ten_chuyen_nganh}}</option>
+                            {% endfor %}
+                        {% endif %}
+                        </select>
+                    </div>
+                    <div clas="form-group">
+                        <label>Tạo lệ phí</label>
+                        <input type="text" class="form-control" name="txtlephi"/>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <input type="checkbox" id="myCheck" checked="checked" name="cthoathuan"/><small>  Tôi đòng ý với mọi điều khoản trong <a href="#" data-toggle="modal" data-target="#modalthoathuan">thỏa thuận</a></small>
+                    </div>
+                    <div class="modal" id="modalthoathuan" role="modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h3 class="modal-title">
+                                        Bản thỏa thuận khi đăng ký mở khóa học
+                                    </h3>
+                                </div>
+                                <div class="modal-body">
 
-            <div class="box-body pad">
-               <textarea name="txtgioithieu" id="txtgioithieu" rows="10" cols="80"></textarea>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="box box-default">
-            <div class="box-body">
-                <div clas="form-group">
-                    <label>Chọn ảnh đại diện</label>
-                    <input type="file" class="form-control" name="txtfile"/>
-                </div><br>
-                <div class="form-group">
-                    <label>Danh mục</label>
-                    <select name="select_danhmuc" id="select_danhmuc" class="form-control">
-                    {% if ds_chuyennganh %}
-                        {% for chuyen_nganh in ds_chuyennganh %}
-                            <option value="{{chuyen_nganh.ma_chuyen_nganh}}">{{chuyen_nganh.ten_chuyen_nganh}}</option>
-                        {% endfor %}
-                    {% endif %}
-                    </select>
-                </div>
-                <div clas="form-group">
-                    <label>Tạo lệ phí</label>
-                    <input type="text" class="form-control" name="txtlephi"/>
-                </div>
-                </br>
-                <div class="form-group">
-                    <input type="checkbox" id="myCheck" checked="checked" name="cthoathuan"/><small>  Tôi đòng ý với mọi điều khoản trong <a href="#" data-toggle="modal" data-target="#modalthoathuan">thỏa thuận</a></small>
-                </div>
-                <div class="modal" id="modalthoathuan" role="modal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3 class="modal-title">
-                                    Bản thỏa thuận khi đăng ký mở khóa học
-                                </h3>
-                            </div>
-                            <div class="modal-body">
-
-                                Điều 1: Các khóa học phải mang nội dung tích cực, đúng tính chất của một khóa học lành mạnh
-                                <hr>
-                                ĐIều 2: Các bài viết thuộc mỗi khóa học phải có nội dung phù hợp với từng khóa học
-                                <hr>
-                                Điều 3: Nghiêm chỉnh chấp hành các nội quy do ban quản trị đề ra
-                                <hr>
-                                Mỗi khóa học đề ra bạn được 80% lợi nhuận, 20% triết khấu hệ thống.
-                            </div>
-                            <div class="modal-footer">
-                                <button onclick="check" class="close" data-dismiss="modal">Tôi đồng ý</button>
+                                    Điều 1: Các khóa học phải mang nội dung tích cực, đúng tính chất của một khóa học lành mạnh
+                                    <hr>
+                                    ĐIều 2: Các bài viết thuộc mỗi khóa học phải có nội dung phù hợp với từng khóa học
+                                    <hr>
+                                    Điều 3: Nghiêm chỉnh chấp hành các nội quy do ban quản trị đề ra
+                                    <hr>
+                                    Mỗi khóa học đề ra bạn được 80% lợi nhuận, 20% triết khấu hệ thống.
+                                </div>
+                                <div class="modal-footer">
+                                    <button onclick="check" class="close" data-dismiss="modal">Tôi đồng ý</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div clas="form-group right">
+                        <input type="button" class="btn-sm btn-danger" name="btnHuy" value="Hủy"/>
+                        <input type="submit" class="btn-sm btn-primary" name="btnDangky" value="Đăng ký"/>
+                    </div>
                 </div>
-                <div clas="form-group right">
-                    <input type="button" class="btn-sm btn-danger" name="btnHuy" value="Hủy"/>
-                    <input type="submit" class="btn-sm btn-primary" name="btnDangky" value="Đăng ký"/>
-                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-      </div>
-    </form>
-</section>
+          </div>
+        </form>
+    </section>
+</div>
 <script>
 
     function check() {

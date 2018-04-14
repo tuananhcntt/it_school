@@ -3,7 +3,7 @@ from django.template import loader
 from django.shortcuts import redirect
 from cdh.models import ChuyenNganh, KhoaHoc, BaiViet, User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+import hashlib
 
 def index(request):
     """
@@ -25,28 +25,33 @@ def index(request):
         if request.GET.get("btnlogout"):
             del request.session['username']
             user = ""
+            return redirect('trangchu')
     else:
         if request.GET.get("btnlogin"):
-            username = request.GET['username']
-            matkhau = request.GET['password']
+            u = User()
+            u.username = request.GET['username']
+            u.mat_khau = request.GET['password']
+            u.mat_khau = hashlib.sha256(b"u.mat_khau").hexdigest()
             try:
-                user = User.objects.get(username=username, mat_khau=matkhau)
+                user = User.objects.get(username=u.username, mat_khau= u.mat_khau)
             except:
                 user = ""
             if user:
                 request.session['username'] = user.username
-
+            return redirect('trangchu')
 
 
         if request.GET.get("btndangki"):
             u = User()
             u.username = request.GET.get('txtusername')
             u.mat_khau = request.GET.get('txtpassword1')
+            u.mat_khau = hashlib.sha256(b"u.mat_khau").hexdigest()
             u.ho_ten = request.GET.get('txthoten')
             u.img = "uploads/imguser.png"
             u.gioi_tinh = " "
             u.loai_user_id = 2
             u.save()
+            return redirect('trangchu')
     context = {
         "ds_chuyen_nganh": ds_chuyen_nganh,
         "ds_khoa_hoc": ds_khoa_hoc,
@@ -55,19 +60,3 @@ def index(request):
         "q": query,
     }
     return HttpResponse(temp.render(context))
-
-def login(request):
-    user = User.objects.get(username=request.POST['username'])
-    if user.password == request.POST['password']:
-        request.session['username'] = user.username
-        request.session.set_expiry(15);
-        return HttpResponse("Đã đăng nhập")
-    else:
-        return HttpResponse("user và pass chưa đúng")
-#
-# def logout(request):
-#     try:
-#         del request.session['username']
-#     except KeyError:
-#         pass
-#     return HttpResponse("Bạn đã đăng xuất")

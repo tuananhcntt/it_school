@@ -45,7 +45,6 @@
 							</a>
 							<ul class="dropdown-menu agile_short_dropdown">
 								<li><a href="{% url 'index' %}">Truy cập quản lý</a></li>
-								<li><a href="#">Cài đặt cá nhân</a></li>
 								<li>
 									<a href="#">
 										<form action="" method="GET">
@@ -84,7 +83,7 @@
 							</ul>
 							{% endif %}
 						</li>
-						<li><a href="#" class="hvr-underline-from-center">Liên hệ</a></li>
+						<li><a href="{%url 'lienhe' %}" class="hvr-underline-from-center">Liên hệ</a></li>
 					</ul>
 				</nav>
 
@@ -102,6 +101,7 @@
 		<div class="clearfix"> </div>
 	</div>
 	<!-- Modal1 -->
+
 	<div class="modal fade" id="modalDangnhap" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -112,7 +112,8 @@
 					<div class="signin-form profile">
 						<h3 class="agileinfo_sign">Đăng nhập</h3>
 						<div class="login-form">
-							<form action="" method="GET" name="frmlogin" enctype="multipart/form-data">{% csrf_token %}
+
+							<form action="" method="GET" name="frmlogin" enctype="multipart/form-data">
 								<input type="Text" name="username" placeholder="username" required="">
 								<input type="password" name="password" placeholder="Password" required="">
 								<div class="tp">
@@ -126,7 +127,7 @@
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 							</ul>
 						</div>
-						<p><a href="#" data-toggle="modal" data-target="#myModal3"> Tôi chưa có tài khoản?</a></p>
+
 					</div>
 				</div>
 			</div>
@@ -144,7 +145,7 @@
 					<div class="signin-form profile">
 						<h3 class="agileinfo_sign">Đăng kí</h3>
 						<div class="login-form">
-							<form action="" method="GET" enctype="multipart/form-data">{% csrf_token %}
+							<form action="" method="GET" enctype="multipart/form-data">
 								<input type="Text" name="txtusername" id="txtusername" placeholder="Username" required="">
 								<input type="password" name="txtpassword1" id="password1" placeholder="Password" required="">
 								<input type="password" name="txtpassword2" id="password2" placeholder="Confirm Password" required="">
@@ -187,17 +188,21 @@
 				<div class="col-md-4 w3_agile_footer_grid">
 					<h3>Danh mục</h3>
 					<ul class="agileits_w3layouts_footer_grid_list">
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="index.html">Home</a></li>
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="about.html">Giới thiệu</a></li>
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="portfolio.html">Chuyên nghành</a></li>
-						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="contact.html">Liên hệ</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="{% url 'trangchu' %}">Home</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="{% url 'lienhe' %}">Liên hệ</a></li>
+						<li><i class="fa fa-angle-double-right" aria-hidden="true"></i><a href="{% url 'index' %}">Truy cập quản lí</a></li>
 					</ul>
 				</div>
 				<div class="col-md-4 w3_agile_footer_grid">
 					<h3>Ban quản trị</h3>
 					<div class="w3_agileits_footer_grid_left">
 						<a href="#" data-toggle="modal" data-target="#myModal">
-							<img src="images/f1.jpg" alt=" " class="img-responsive" />
+							<img src="{% static 'images/f1.jpg' %}" alt=" " class="img-responsive" />
+						</a>
+					</div>
+					<div class="w3_agileits_footer_grid_left">
+						<a href="#" data-toggle="modal" data-target="#myModal">
+							<img src="{% static 'images/f1.jpg' %}" alt=" " class="img-responsive" />
 						</a>
 					</div>
 
@@ -208,7 +213,7 @@
 			</div>
 
 			<div class="agileinfo_copyright">
-				<p>Hỗ trợ IT-school: <a href="https://facebook.com/lantucntt">facebook.com/langtucntt</a></p>
+				<p>Hỗ trợ IT-school: <a href="https://facebook.com/cungnhauhocweb">facebook.com/cungnhauhocweb</a></p>
 			</div>
 		</div>
 	</div>
@@ -233,6 +238,7 @@
 				document.getElementById("password2").setCustomValidity('');
 			//empty string means no validation error
 		}
+
 	</script>
 	<!-- //password-script -->
     <script src="{% static 'js/bars.js' %}"></script>
@@ -358,7 +364,7 @@
 			});
 
 		});
-	</script>-->
+	</script>
 	<!-- //flexisel -->
 	<!-- //flexisel -->
 	<!-- js for portfolio lightbox -->
@@ -400,4 +406,26 @@
 		});
 	</script>
 	<!-- //js -->
+<div id="fb-root"></div>
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <style>#cfacebook{position:fixed;bottom:0px;right:100px;z-index:999999999999999;width:250px;height:auto;box-shadow:6px 6px 6px 10px rgba(0,0,0,0.2);border-top-left-radius:5px;border-top-right-radius:5px;overflow:hidden;}#cfacebook .fchat{float:left;width:100%;height:270px;overflow:hidden;display:none;background-color:#fff;}#cfacebook .fchat .fb-page{margin-top:-130px;float:left;}#cfacebook a.chat_fb{float:left;padding:0 25px;width:250px;color:#fff;text-decoration:none;height:40px;line-height:40px;text-shadow:0 1px 0 rgba(0,0,0,0.1);background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAqCAMAAABFoMFOAAAAWlBMV…8/UxBxQDQuFwlpqgBZBq6+P+unVY1GnDgwqbD2zGz5e1lBdwvGGPE6OgAAAABJRU5ErkJggg==);background-repeat:repeat-x;background-size:auto;background-position:0 0;background-color:#3a5795;border:0;border-bottom:1px solid #133783;z-index:9999999;margin-right:12px;font-size:18px;}#cfacebook a.chat_fb:hover{color:yellow;text-decoration:none;}</style>
+  <script>
+  jQuery(document).ready(function () {
+  jQuery(".chat_fb").click(function() {
+jQuery('.fchat').toggle('slow');
+  });
+  });
+  </script>
+  <div id="cfacebook">
+  <a href="javascript:;" class="chat_fb" onclick="return:false;"><i class="fa fa-facebook-square"></i> Phản hồi của bạn</a>
+  <div class="fchat">
+  <div class="fb-page" data-tabs="messages" data-href="https://www.facebook.com/cungnhauhocweb" data-width="250" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>
+  </div>
+  </div>
 </body>
